@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "1323:1323"
+    environment:
+      - APP_ENV=development
+    volumes:
+      - .:/app
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-dev
+    ports:
+      - "5173:5173"
+    environment:
+      - APP_ENV=development
+    volumes:
+      - .:/app
