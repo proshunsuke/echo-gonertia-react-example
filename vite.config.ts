@@ -30,4 +30,13 @@ export default defineConfig({
             host: 'localhost',
         },
     },
+    test: {
+        browser: {
+            enabled: true,
+            name: 'chromium',
+            provider: 'playwright',
+            headless: true,
+        },
+        setupFiles: ['./vitest.setup.tsx'],
+    },
 });

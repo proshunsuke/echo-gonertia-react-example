@@ -21,3 +21,13 @@ services:
       - APP_ENV=development
     volumes:
       - .:/app
+  front-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: node-dev-test
+    environment:
+      - APP_ENV=test
+    volumes:
+      - .:/app
+    entrypoint: ["tail", "-f", "/dev/null"]

@@ -20,6 +20,7 @@ This is inspired by [React Example w/ Gonertia](https://github.com/sdil/gonertia
 - [Inertia.js](https://inertiajs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vite.dev/)
+- [Vitest](https://vitest.dev/)
 - [Biome](https://biomejs.dev/)
 
 ## Technical Details 
@@ -33,6 +34,7 @@ This is inspired by [React Example w/ Gonertia](https://github.com/sdil/gonertia
 - Simple page display
 - Post requests uging Form helper
 - Using layouts
+- Testing (frontend)
 
 ## Instruction
 
@@ -60,6 +62,12 @@ Enter docker container
 make ssh/app
 make ssh/front
 ````
+
+Run tests
+
+```bash
+make test
+```
 
 ## How to contribute
 

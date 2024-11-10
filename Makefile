@@ -26,3 +26,8 @@ fmt/go:
 
 fmt/front:
 	docker compose exec front npx @biomejs/biome check --write resources
+
+test: test/front
+
+test/front:
+	docker compose exec front-test npm run test

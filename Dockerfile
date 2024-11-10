@@ -51,3 +51,10 @@ COPY . .
 EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
+
+FROM node-base AS node-dev-test
+
+COPY . .
+
+RUN npx playwright install && \
+    npx playwright install-deps \
