@@ -6,7 +6,7 @@ This is inspired by [React Example w/ Gonertia](https://github.com/sdil/gonertia
 
 ## Demo
 
-[demo.webm](https://github.com/user-attachments/assets/9f74c5b2-c3fa-480e-8259-3e8138579700)
+[demo.webm](https://github.com/user-attachments/assets/139e8fc9-340f-41ec-a8b2-c1f3864fe129)
 
 ## Technologies
 
