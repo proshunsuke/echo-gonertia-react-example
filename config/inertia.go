@@ -1,6 +1,7 @@
 package config
 
 import (
+	"echo-gonertia-react-example/lib"
 	"echo-gonertia-react-example/provider"
 	"encoding/json"
 	"fmt"
@@ -8,12 +9,16 @@ import (
 	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"strings"
 )
 
 func InitInertia() *inertia.Inertia {
-	viteHotFile := "./public/hot"
-	rootViewFile := "resources/views/root.html"
+	rootDir := lib.ProjectRoot()
+	viteHotFile := filepath.Join(rootDir, "public", "hot")
+	rootViewFile := filepath.Join(rootDir, "resources", "views", "root.html")
+	manifestPath := filepath.Join(rootDir, "public", "build", "manifest.json")
+	viteManifestPath := filepath.Join(rootDir, "public", "build", ".vite", "manifest.json")
 	flashProvider := provider.NewSessionFlashProvider()
 
 	// check if laravel-vite-plugin is running in dev mode (it puts a "hot" file in the public folder)
@@ -47,13 +52,11 @@ func InitInertia() *inertia.Inertia {
 	}
 
 	// laravel-vite-plugin not running in dev mode, use build manifest file
-	manifestPath := "./public/build/manifest.json"
-
 	// check if the manifest file exists, if not, rename it
 	if _, err := os.Stat(manifestPath); os.IsNotExist(err) {
 		// move the manifest from ./public/build/.vite/manifest.json to ./public/build/manifest.json
 		// so that the vite function can find it
-		err := os.Rename("./public/build/.vite/manifest.json", "./public/build/manifest.json")
+		err := os.Rename(viteManifestPath, manifestPath)
 		if err != nil {
 			return nil
 		}
