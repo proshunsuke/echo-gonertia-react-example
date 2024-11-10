@@ -20,6 +20,7 @@ This is inspired by [React Example w/ Gonertia](https://github.com/sdil/gonertia
 - [Inertia.js](https://inertiajs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vite.dev/)
+- [Biome](https://biomejs.dev/)
 
 ## Technical Details 
 

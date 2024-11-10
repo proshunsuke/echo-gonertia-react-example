@@ -19,5 +19,10 @@ run/front:
 build/front:
 	docker compose exec front npm run build
 
-fmt:
+fmt: fmt/go fmt/front
+
+fmt/go:
 	docker compose exec app go fmt ./...
+
+fmt/front:
+	docker compose exec front npx @biomejs/biome check --write resources
