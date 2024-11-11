@@ -15,7 +15,7 @@ func Home() *HomeHandler {
 
 func (h *HomeHandler) Index(i *inertia.Inertia) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return i.Render(c.Response(), c.Request(), "Index", inertia.Props{
+		return i.Render(c.Response(), c.Request(), "index", inertia.Props{
 			"text": "Hello, World!",
 		})
 	}

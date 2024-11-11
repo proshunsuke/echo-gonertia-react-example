@@ -4,10 +4,10 @@ compose/build:
 compose/up:
 	docker compose up
 
-ssh/app:
+shell/app:
 	docker compose exec app /bin/sh
 
-ssh/front:
+shell/front:
 	docker compose exec front /bin/sh
 
 run/app:
@@ -19,13 +19,14 @@ run/front:
 build/front:
 	docker compose exec front npm run build
 
-fmt: fmt/go fmt/front
+check: check/go check/front
 
-fmt/go:
+check/go:
 	docker compose exec app go fmt ./...
 
-fmt/front:
-	docker compose exec front npx @biomejs/biome check --write resources
+check/front:
+	docker compose exec front npx tsc --noEmit
+	docker compose exec front npx @biomejs/biome check --write --unsafe resources
 
 test: test/front
 

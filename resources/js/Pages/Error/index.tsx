@@ -1,5 +1,5 @@
 import { Head } from "@inertiajs/react";
-import React, { type FC } from "react";
+import type { FC } from "react";
 
 type Props = {
 	status: number;
@@ -25,7 +25,7 @@ const ErrorComponent: FC<Props> = ({ status }) => {
 	return (
 		<>
 			<Head title="Error" />
-			<h1 className="mb-1 text-xl font-bold">{title}</h1>
+			<h1 className="mb-1 font-bold text-xl">{title}</h1>
 			<div>{description}</div>
 		</>
 	);

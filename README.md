@@ -59,9 +59,15 @@ make compose/build
 Enter docker container
 
 ````bash
-make ssh/app
-make ssh/front
+make shell/app
+make shell/front
 ````
+
+Run lint and format
+
+```bash
+make check
+```
 
 Run tests
 

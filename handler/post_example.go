@@ -15,14 +15,14 @@ func PostExample() *PostExampleHandler {
 
 func (h *PostExampleHandler) Index(i *inertia.Inertia) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return i.Render(c.Response(), c.Request(), "PostExample/Index", inertia.Props{
+		return i.Render(c.Response(), c.Request(), "PostExample/index", inertia.Props{
 			"text": "Post Example",
 		})
 	}
 }
 
 type Data struct {
-	PostData string `json:"post_data" validate:"required,gte=1" validateMsg:"post_data is required"`
+	PostData string `json:"postData" validate:"required,gte=1" validateMsg:"postData is required"`
 }
 
 func (h *PostExampleHandler) Post(i *inertia.Inertia) echo.HandlerFunc {

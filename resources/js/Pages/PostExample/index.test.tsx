@@ -1,9 +1,9 @@
-import Home from "@/Pages/Index";
+import PostExample from "@/Pages/PostExample/index";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-react";
 
 test("renders text", async () => {
-	const { getByText } = render(<Home text="title" />);
+	const { getByText } = render(<PostExample text="title" />);
 
 	await expect.element(getByText("title")).toBeInTheDocument();
 });

@@ -30,7 +30,7 @@ func (h *ErrorHandler) Error(err error, c echo.Context) {
 	c.Response().Header().Set("X-Inertia", "true")
 	c.Response().WriteHeader(code)
 
-	err = h.inertia.Render(c.Response(), c.Request(), "Error/Index", inertia.Props{
+	err = h.inertia.Render(c.Response(), c.Request(), "Error/index", inertia.Props{
 		"status": code,
 	})
 
