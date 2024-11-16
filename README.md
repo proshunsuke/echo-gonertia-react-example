@@ -46,7 +46,7 @@ make compose/up
 
 2. Access app
 
-http://localhost:1323/
+http://localhost:8080/
 
 ## Development
 

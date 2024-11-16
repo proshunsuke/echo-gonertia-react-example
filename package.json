@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --mode client && vite build",
+    "build": "vite build",
     "test": "vitest --run"
   },
   "dependencies": {

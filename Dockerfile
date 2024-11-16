@@ -1,4 +1,4 @@
-FROM golang:1.23.2-alpine AS base
+FROM golang:1.23.2-alpine3.20 AS base
 
 WORKDIR /app
 
@@ -19,27 +19,23 @@ FROM base AS builder
 
 COPY . .
 
-RUN go build -o echo-server ./main.go
+RUN go build -ldflags="-s -w" -o echo-server ./server.go
 
-FROM alpine:3.18 AS release
+FROM alpine:3.20 AS release
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 COPY --from=builder /app/echo-server /usr/local/bin/echo-server
 
-EXPOSE 8080
+EXPOSE 1323
 
 USER appuser
 
 CMD ["echo-server"]
 
-FROM node:22.11.0 AS node-base
+FROM node:22.11.0-alpine3.20 AS node-base
 
 WORKDIR /app
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libatomic1 && \
-    rm -rf /var/lib/apt/lists/*
 
 COPY package*json tsconfig.json vite.config.ts ./
 RUN npm ci
@@ -52,9 +48,32 @@ EXPOSE 3000
 
 CMD ["npm", "run", "dev"]
 
-FROM node-base AS node-dev-test
+FROM node:22.11.0 AS node-dev-test
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libatomic1
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
 RUN npx playwright install && \
-    npx playwright install-deps \
+    npx playwright install-deps
+
+FROM node-base AS node-builder
+
+COPY . .
+
+RUN npm run build
+
+FROM nginx:1.26.2 AS nginx-base
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+FROM nginx-base AS nginx-release
+
+COPY --from=node-builder /app/public /usr/share/nginx/html/public
