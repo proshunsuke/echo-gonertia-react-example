@@ -25,9 +25,13 @@ func (h *ErrorHandler) Error(err error, c echo.Context) {
 	}
 	c.Logger().Error(err)
 
-	// Gonertia enforces a 200 status, so constructing the Inertia response manually.
-	c.Response().Header().Set("Content-Type", "application/json")
-	c.Response().Header().Set("X-Inertia", "true")
+	// Gonertia enforces a 200 status, so constructing response header manually.
+	if inertia.IsInertiaRequest(c.Request()) {
+		c.Response().Header().Set("Content-Type", "application/json")
+		c.Response().Header().Set("X-Inertia", "true")
+	} else {
+		c.Response().Header().Set("Content-Type", "text/html")
+	}
 	c.Response().WriteHeader(code)
 
 	err = h.inertia.Render(c.Response(), c.Request(), "Error/index", inertia.Props{

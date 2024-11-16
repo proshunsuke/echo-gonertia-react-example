@@ -28,7 +28,13 @@ export const Layout: FC<Props> = ({ children }) => {
 										href="/post-example"
 										className="group flex items-center gap-2 rounded-lg px-2.5 py-1.5 font-medium text-slate-800 text-sm hover:bg-violet-50 hover:text-violet-600 active:border-violet-100"
 									>
-										<span>PostExample</span>
+										<span>Post Example</span>
+									</Link>
+									<Link
+										href="/404-error-page"
+										className="group flex items-center gap-2 rounded-lg px-2.5 py-1.5 font-medium text-slate-800 text-sm hover:bg-violet-50 hover:text-violet-600 active:border-violet-100"
+									>
+										<span>404 Error Page</span>
 									</Link>
 								</nav>
 							</div>
