@@ -24,7 +24,7 @@ const ErrorComponent: FC<Props> = ({ status }) => {
 
 	return (
 		<>
-			<Head title="Error" />
+			<Head title={`${status} Error`} />
 			<h1 className="mb-1 font-bold text-xl">{title}</h1>
 			<div>{description}</div>
 		</>
