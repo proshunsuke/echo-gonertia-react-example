@@ -1,8 +1,14 @@
 compose/build:
 	docker compose build --no-cache
 
+compose/build/release:
+	docker compose -f docker-compose.release.yml build --no-cache
+
 compose/up:
 	docker compose up
+
+compose/up/release:
+	docker compose -f docker-compose.release.yml up
 
 shell/app:
 	docker compose exec app /bin/sh

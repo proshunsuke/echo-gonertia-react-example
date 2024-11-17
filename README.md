@@ -75,6 +75,13 @@ Run tests
 make test
 ```
 
+Simulate production environment
+
+```bash
+make compose/build/release
+make compose/up/release
+```
+
 ## How to contribute
 
 - Create a local branch or fork

@@ -1,38 +1,3 @@
-FROM golang:1.23.2-alpine3.20 AS base
-
-WORKDIR /app
-
-RUN apk add --no-cache git
-
-COPY go.mod go.sum ./
-RUN go mod download
-
-FROM base AS dev
-
-RUN go install github.com/githubnemo/CompileDaemon@latest
-
-COPY . .
-
-CMD ["CompileDaemon", "--build=go build -o echo-server ./server.go", "--command=./echo-server"]
-
-FROM base AS builder
-
-COPY . .
-
-RUN go build -ldflags="-s -w" -o echo-server ./server.go
-
-FROM alpine:3.20 AS release
-
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
-COPY --from=builder /app/echo-server /usr/local/bin/echo-server
-
-EXPOSE 1323
-
-USER appuser
-
-CMD ["echo-server"]
-
 FROM node:22.11.0-alpine3.20 AS node-base
 
 WORKDIR /app
@@ -67,6 +32,43 @@ FROM node-base AS node-builder
 COPY . .
 
 RUN npm run build
+
+FROM golang:1.23.2-alpine3.20 AS base
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+FROM base AS dev
+
+RUN go install github.com/githubnemo/CompileDaemon@latest
+
+COPY . .
+
+CMD ["CompileDaemon", "--build=go build -o echo-server ./server.go", "--command=./echo-server"]
+
+FROM base AS builder
+
+COPY . .
+
+RUN go build -ldflags="-s -w" -o echo-server ./server.go
+
+FROM alpine:3.20 AS release
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY --from=builder /app/echo-server /usr/local/bin/echo-server
+COPY --from=builder /app/resources/views/root.html ./resources/views/root.html
+COPY --from=node-builder /app/public/build/.vite/manifest.json ./public/build/manifest.json
+
+EXPOSE 1323
+
+USER appuser
+
+CMD ["echo-server"]
 
 FROM nginx:1.26.2 AS nginx-base
 
