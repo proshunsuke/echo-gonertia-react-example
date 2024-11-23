@@ -19,8 +19,8 @@ func main() {
 	e.Validator = &config.CustomValidator{Validator: validator.New()}
 
 	e.Use(appMiddleware.CustomCSRF())
-	e.Use(session.Middleware(sessions.NewCookieStore([]byte("a_very_long_random_string_to_secure_session"))))
 	e.Use(appMiddleware.Inertia(i))
+	e.Use(session.Middleware(sessions.NewCookieStore([]byte("a_very_long_random_string_to_secure_session"))))
 
 	e.GET("/", handler.Home().Index(i)).Name = "home"
 	e.GET("/post-example", handler.PostExample().Index(i)).Name = "post-example"
