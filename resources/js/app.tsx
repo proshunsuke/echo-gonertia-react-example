@@ -13,9 +13,7 @@ type PageType = Page & {
 
 createInertiaApp({
 	resolve: async (name) => {
-		const pages = import.meta.glob<Promise<PageType>>(
-			"./Pages/**/!(*.test).tsx",
-		);
+		const pages = import.meta.glob<Promise<PageType>>("./Pages/**/index.tsx");
 		const pageImport = pages[`./Pages/${name}.tsx`];
 		const page = await pageImport();
 		page.default.layout =
