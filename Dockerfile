@@ -44,11 +44,11 @@ RUN go mod download
 
 FROM base AS dev
 
-RUN go install github.com/githubnemo/CompileDaemon@latest
+RUN go install github.com/air-verse/air@latest
 
 COPY . .
 
-CMD ["CompileDaemon", "--build=go build -o echo-server ./server.go", "--command=./echo-server"]
+CMD ["air", "-c", ".air.toml"]
 
 FROM base AS builder
 
