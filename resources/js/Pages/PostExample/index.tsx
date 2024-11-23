@@ -25,7 +25,7 @@ const PostExample: FC<Props> = ({ text }) => {
 						<div className="flex gap-2">
 							<input
 								type="text"
-								placeholder={"input post_data"}
+								placeholder={"input postData"}
 								value={data.postData}
 								className="block w-full rounded-lg border border-neutral-200 py-2 ps-2 pe-3 leading-6 placeholder-neutral-500 focus:border-neutral-500 focus:ring focus:ring-neutral-500/25"
 								onChange={(e) => setData("postData", e.target.value)}
